@@ -116,7 +116,7 @@ function App() {
               </p>
               {/* About Me Text (Moved from About.tsx) */}
               <p className="text-gray-300 leading-relaxed mb-8">
-                I am a Computer Science Engineering student at Vellore Institute of Technology, Chennai, with a strong passion for technology and innovation. My expertise spans across various domains including web development, artificial intelligence, and blockchain technology. I have experience working with multiple programming languages and frameworks, and I'm always eager to learn and adapt to new technologies.
+                I am a Computer Science Engineering student at Vellore Institute of Technology, Chennai, with a strong passion for technology and innovation. My expertise spans across various domains including web development, artificial intelligence, and blockchain technology. I have experience in freelancing projects and pursuing research in the fields of Generative AI,Large Language Models(LLM's), Web Development and Deep Learning. I have also worked with a wide range of programming languages ,frameworks, technologies and deployment platforms and I'm always eager to learn and adapt to new technologies quickly.
               </p>
 
               {/* Contact Info & Links */}
@@ -133,14 +133,14 @@ function App() {
                   <Linkedin size={20} />
                   <span>LinkedIn</span>
                 </a>
-                 <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
+                 <a href="https://drive.google.com/file/d/1hnbstXoVCCy2EVNfW1qQCyEWiiY_0EwX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
                   <FileText size={20} />
                   <span>Resume</span>
                 </a>
-                <div className="flex items-center gap-2 text-gray-400">
-                   <Phone size={20} className="text-[#39ff14]/60" />
-                   <span>+91-9566084569</span>
-                </div>
+                <a href="https://leetcode.com/u/jaashishram7/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
+                  <Code size={20} />
+                  <span>Leetcode</span>
+                </a>
                  {/* Optional LeetCode/HackerRank Links */}
                  {/* <a href="YOUR_LEETCODE_LINK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
                    <Code size={20} />

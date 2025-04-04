@@ -1,7 +1,7 @@
 // src/components/Contact.tsx
 // Create this new file
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Linkedin, Phone } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -18,8 +18,10 @@ const Contact = () => {
           </a>
         </div>
         <div className="flex items-center space-x-3">
-          <Phone size={20} className="text-[#39ff14]" />
-          <span className="text-gray-300">+91-9566084569</span>
+          <Linkedin size={20} className="text-[#39ff14]" />
+          <a href="https://www.linkedin.com/in/ashish-ram-j-a-/" className="text-gray-300 hover:text-[#39ff14] transition-colors">
+            Ashish Ram J A
+          </a>
         </div>
       </div>
       {/* Optional: Add a simple contact form placeholder or link */}

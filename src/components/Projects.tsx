@@ -41,7 +41,7 @@ const Projects = () => {
          "Engineered asynchronous task management with Celery and Redis, enabling background processing that schedules tasks for randomly-timed responses to mimic human interaction while avoiding rate limiting.",
          "Integrated robust operational features including secure storage of Instagram access tokens in SQLite, real-time monitoring via Server-Sent Events (SSE), health checks, and CI/CD automation with GitHub Actions."
        ],
-       image: "/chatbot.png", // Ensure path starts with '/'
+       image: "/Chatbot.png", // Ensure path starts with '/'
        links: {
          github: "https://github.com/AshishRam7/deploy-test-insta-bot"
        }
@@ -56,7 +56,7 @@ const Projects = () => {
          "Enabled functionalities like sending emails, creating events, managing contacts, and retrieving mail/OneDrive items via natural language prompts.",
          "Built a React-based Chrome Extension frontend for user interaction with the AI agent.",
        ],
-       image: "public/AIassist.png", // Ensure path starts with '/'
+       image: "/AIassist.png", // Ensure path starts with '/'
        links: {
           github: "https://github.com/AshishRam7/ashishram7-azure-ai-hack",
        },

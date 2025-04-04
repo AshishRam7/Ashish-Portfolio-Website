@@ -101,7 +101,7 @@ function App() {
         <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-16 lg:py-24">
           <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <img
-  src="../public/profile-photo.jpg" // Path starts with '/' - refers to the public folder
+  src="./public/profile-photo.jpg" // Path starts with '/' - refers to the public folder
   alt="Ashish Ram J A - Profile Photo" // Add descriptive alt text!
   className="w-48 h-48 lg:w-60 lg:h-60 rounded-full border-2 border-[#39ff14]/30 object-cover shadow-lg shadow-[#39ff14]/10 flex-shrink-0" // Added object-cover
 />

@@ -56,7 +56,7 @@ const Projects = () => {
          "Enabled functionalities like sending emails, creating events, managing contacts, and retrieving mail/OneDrive items via natural language prompts.",
          "Built a React-based Chrome Extension frontend for user interaction with the AI agent.",
        ],
-       image: "/AIassist.png", // Ensure path starts with '/'
+       image: "public/AIassist.png", // Ensure path starts with '/'
        links: {
           github: "https://github.com/AshishRam7/ashishram7-azure-ai-hack",
        },

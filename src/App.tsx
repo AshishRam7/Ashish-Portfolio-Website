@@ -1,6 +1,7 @@
 // src/App.tsx
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github,Users, Linkedin, Mail, Award, Code2, Briefcase, GraduationCap, ScrollText, Medal, Home, Contact as ContactIcon, FileText, Code, Terminal, Phone } from 'lucide-react'; // Added Home, ContactIcon, FileText, Code, Terminal, Phone
+// Added BookOpen, MessageSquareQuote icons
+import { Menu, X, Github, Users, Linkedin, Mail, Award, Code2, Briefcase, GraduationCap, ScrollText, Medal, Home, Contact as ContactIcon, FileText, Code, Terminal, Phone, BookOpen, MessageSquareQuote } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 // Removed About import
 import Skills from './components/Skills';
@@ -10,24 +11,28 @@ import Experience from './components/Experience';
 import Achievements from './components/Achievements';
 import Certifications from './components/Certifications';
 import Responsibility from './components/Responsibility';
-import Contact from './components/Contact'; // Added Contact import
-import Footer from './components/Footer'; // Added Footer import
+import Blogs from './components/Blogs'; // Added Blogs import
+import Testimonials from './components/Testimonials'; // Added Testimonials import
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero'); // Default to hero
 
-  // Updated sections array
+  // Updated sections array with Blogs and Testimonials
   const sections = [
-    { id: 'hero', label: 'Home', icon: <Home size={20} /> }, // Changed About to Home/Hero
+    { id: 'hero', label: 'Home', icon: <Home size={20} /> },
     { id: 'skills', label: 'Skills', icon: <ScrollText size={20} /> },
-    { id: 'projects', label: 'Projects', icon: <Code2 size={20} /> }, // Changed icon for consistency
+    { id: 'projects', label: 'Projects', icon: <Code2 size={20} /> },
     { id: 'education', label: 'Education', icon: <GraduationCap size={20} /> },
     { id: 'experience', label: 'Experience', icon: <Briefcase size={20} /> },
     { id: 'achievements', label: 'Achievements', icon: <Medal size={20} /> },
     { id: 'certifications', label: 'Certifications', icon: <Award size={20} /> },
-    { id: 'responsibility', label: 'POR', icon: <Users size={20} /> }, // Changed icon
-    { id: 'contact', label: 'Contact', icon: <ContactIcon size={20} /> }, // Added Contact section
+    { id: 'responsibility', label: 'POR', icon: <Users size={20} /> },
+    { id: 'blogs', label: 'Blogs', icon: <BookOpen size={20} /> }, // Added Blogs section
+    { id: 'testimonials', label: 'Testimonials', icon: <MessageSquareQuote size={20} /> }, // Added Testimonials section
+    { id: 'contact', label: 'Contact', icon: <ContactIcon size={20} /> },
   ];
 
   useEffect(() => {
@@ -35,35 +40,40 @@ function App() {
       const offset = window.innerHeight * 0.3; // Adjust offset as needed
       let current = 'hero';
 
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Check if the top of the section is within the viewport (with offset)
-          if (rect.top <= offset && rect.bottom >= offset) {
-            current = section.id;
-            break;
-          }
-          // Fallback for sections taller than viewport or last section
-          if (rect.top <= offset && rect.bottom >= window.innerHeight) {
-             current = section.id;
-             break;
-          }
-           // Check if scrolled past the bottom of a section but not yet into the next one
-          if (rect.bottom < offset && rect.bottom > 0) {
-             current = section.id;
-             // Don't break, let the loop find the actual current section if possible
-          }
+      // Query all section elements at once for potential performance improvement
+      const sectionElements = sections.map(section => document.getElementById(section.id)).filter(el => el !== null) as HTMLElement[];
+
+      for (const element of sectionElements) {
+        const sectionId = element.id;
+        const rect = element.getBoundingClientRect();
+
+        // Prioritize sections fully or significantly in view near the offset line
+        if (rect.top <= offset && rect.bottom >= offset) {
+          current = sectionId;
+          break; // Found the primary section in view
         }
+
+        // Fallback for very tall sections filling the viewport below the offset
+        if (rect.top < offset && rect.bottom >= window.innerHeight) {
+            current = sectionId;
+            // Don't break immediately, maybe a smaller section is perfectly centered
+        }
+
+        // Handle scrolling past sections (assign the last section passed)
+        // This helps if there's space between sections
+         if (rect.bottom < offset && rect.bottom > -element.offsetHeight) { // Check it hasn't scrolled completely out of view upwards
+             current = sectionId;
+         }
       }
-       // Special check for bottom of page
-       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) { // 50px buffer
-           const lastSection = sections[sections.length - 1];
-           if (lastSection) {
-               current = lastSection.id;
+
+       // Special check for reaching the bottom of the page
+       const scrollBuffer = 100; // Increase buffer for reliability
+       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - scrollBuffer)) {
+           const lastSectionId = sections[sections.length - 1]?.id;
+           if (lastSectionId) {
+               current = lastSectionId;
            }
        }
-
 
       setActiveSection(current);
     };
@@ -73,7 +83,7 @@ function App() {
     // Initial check
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]); // Add sections as dependency
+  }, [sections]); // Dependency array includes sections
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -83,6 +93,8 @@ function App() {
       <button
         className="fixed top-4 left-4 z-50 lg:hidden bg-black/80 border border-[#39ff14]/20 p-2 rounded-lg"
         onClick={toggleSidebar}
+        aria-label={isOpen ? "Close menu" : "Open menu"} // Accessibility
+        aria-expanded={isOpen} // Accessibility
       >
         {isOpen ? <X size={24} className="text-[#39ff14]" /> : <Menu size={24} className="text-[#39ff14]" />}
       </button>
@@ -101,10 +113,11 @@ function App() {
         <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-16 lg:py-24">
           <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <img
-  src="profile-photo.jpg" // Path starts with '/' - refers to the public folder
-  alt="Ashish Ram J A - Profile Photo" // Add descriptive alt text!
-  className="w-48 h-48 lg:w-60 lg:h-60 rounded-full border-2 border-[#39ff14]/30 object-cover shadow-lg shadow-[#39ff14]/10 flex-shrink-0" // Added object-cover
-/>
+            // IMPORTANT: Make sure 'profile-photo.jpg' is in your public/ folder
+            src="/profile-photo.jpg"
+            alt="Ashish Ram J A - Profile Photo"
+            className="w-48 h-48 lg:w-60 lg:h-60 rounded-full border-2 border-[#39ff14]/30 object-cover shadow-lg shadow-[#39ff14]/10 flex-shrink-0"
+          />
 
             {/* Hero Text Content */}
             <div className="text-center lg:text-left">
@@ -114,7 +127,7 @@ function App() {
               <p className="text-lg sm:text-xl text-[#39ff14]/90 mb-6">
                 Software Developer | Innovator | Tech Enthusiast
               </p>
-              {/* About Me Text (Moved from About.tsx) */}
+              {/* About Me Text */}
               <p className="text-gray-300 leading-relaxed mb-8">
                 I am a Computer Science Engineering student at Vellore Institute of Technology, Chennai, with a strong passion for technology and innovation. My expertise spans across various domains including web development, artificial intelligence, and blockchain technology. I have experience in freelancing projects and pursuing research in the fields of Generative AI,Large Language Models(LLM's), Web Development and Deep Learning. I have also worked with a wide range of programming languages ,frameworks, technologies and deployment platforms and I'm always eager to learn and adapt to new technologies quickly.
               </p>
@@ -141,12 +154,8 @@ function App() {
                   <Code size={20} />
                   <span>Leetcode</span>
                 </a>
-                 {/* Optional LeetCode/HackerRank Links */}
-                 {/* <a href="YOUR_LEETCODE_LINK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
-                   <Code size={20} />
-                   <span>LeetCode</span>
-                 </a>
-                 <a href="YOUR_HACKERRANK_LINK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
+                 {/* Optional Coding Platform Links */}
+                 {/* <a href="YOUR_HACKERRANK_LINK" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors">
                    <Terminal size={20} />
                    <span>HackerRank</span>
                  </a> */}
@@ -155,33 +164,24 @@ function App() {
           </div>
         </section>
 
-        {/* Other Sections */}
+        {/* Other Sections Container */}
         <div className="max-w-4xl mx-auto px-4 py-8 space-y-24">
-          {/* Removed About section rendering */}
-          <section id="skills">
-            <Skills />
-          </section>
-          <section id="projects">
-            <Projects />
-          </section>
-          <section id="education">
-            <Education />
-          </section>
-          <section id="experience">
-            <Experience />
-          </section>
-          <section id="achievements">
-            <Achievements />
-          </section>
-          <section id="certifications">
-            <Certifications />
-          </section>
-          <section id="responsibility">
-            <Responsibility />
-          </section>
-          <section id="contact"> {/* Added Contact section */}
-            <Contact />
-          </section>
+          {/* Render sections based on the order in the 'sections' array (excluding 'hero') */}
+          {sections.slice(1).map(section => (
+            <section key={section.id} id={section.id}>
+              {section.id === 'skills' && <Skills />}
+              {section.id === 'projects' && <Projects />}
+              {section.id === 'education' && <Education />}
+              {section.id === 'experience' && <Experience />}
+              {section.id === 'achievements' && <Achievements />}
+              {section.id === 'certifications' && <Certifications />}
+              {section.id === 'responsibility' && <Responsibility />}
+              {section.id === 'blogs' && <Blogs />} {/* Render Blogs */}
+              {section.id === 'testimonials' && <Testimonials />} {/* Render Testimonials */}
+              {section.id === 'contact' && <Contact />}
+              {/* Add more conditions here if new sections are added without explicit components */}
+            </section>
+          ))}
         </div>
 
         {/* Footer */}

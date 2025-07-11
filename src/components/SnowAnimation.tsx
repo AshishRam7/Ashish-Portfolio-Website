@@ -37,7 +37,7 @@ const SnowAnimation = () => {
     // Create snowflakes
     const createSnowflakes = () => {
       const snowflakes: Snowflake[] = [];
-      const numSnowflakes = Math.min(150, Math.floor(window.innerWidth / 10)); // Responsive count
+      const numSnowflakes = Math.min(80, Math.floor(window.innerWidth / 15)); // Reduced count for subtlety
 
       for (let i = 0; i < numSnowflakes; i++) {
         snowflakes.push({
@@ -46,7 +46,7 @@ const SnowAnimation = () => {
           y: Math.random() * canvas.height,
           size: Math.random() * 4 + 1, // 1-5px
           speed: Math.random() * 2 + 0.5, // 0.5-2.5px per frame
-          opacity: Math.random() * 0.6 + 0.2, // 0.2-0.8
+          opacity: Math.random() * 0.3 + 0.1, // 0.1-0.4 (more subtle)
           drift: Math.random() * 2 - 1, // -1 to 1 horizontal drift
           rotation: Math.random() * 360,
           rotationSpeed: Math.random() * 2 - 1, // -1 to 1 degrees per frame
@@ -65,7 +65,7 @@ const SnowAnimation = () => {
       // Create a more detailed snowflake shape
       ctx.fillStyle = '#ffffff';
       ctx.shadowColor = '#00ff88';
-      ctx.shadowBlur = snowflake.size * 2;
+      ctx.shadowBlur = snowflake.size * 0.5; // Reduced glow for subtlety
       
       // Draw main circle
       ctx.beginPath();
@@ -140,9 +140,9 @@ const SnowAnimation = () => {
   return (
     <motion.canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-10"
+      className="fixed inset-0 pointer-events-none z-0"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 0.6 }}
       transition={{ duration: 2, ease: "easeOut" }}
       style={{
         background: 'transparent',

@@ -4,6 +4,13 @@ import { Trophy, Code, Award, Target, Medal, Star } from 'lucide-react';
 const Achievements = () => {
   const achievements = [
     {
+      text: "Selected among the Top 10 teams in the Bolt World's Largest Hackathon Build Session organized by Meetstream.ai and the Generative Beings Community",
+      icon: Trophy,
+      category: "Hackathon",
+      rank: "Top 10",
+      color: "from-emerald-500 to-teal-500"
+    },
+    {
       text: "Qualified as one of the Top 10 finalist teams in the National Level Startup-thon organized by UptoSkills",
       icon: Trophy,
       category: "Competition",

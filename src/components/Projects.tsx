@@ -138,20 +138,20 @@ const Projects = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
+            className="group relative bg-gradient-to-br from-gray-50/80 to-gray-100/80 dark:from-white/5 dark:to-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
           >
             <div className="grid lg:grid-cols-5 gap-0">
               {/* Image Section - Takes 2 columns */}
               <div className={`lg:col-span-2 relative overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="aspect-video lg:aspect-square relative bg-gray-800">
+                <div className="aspect-video lg:aspect-square relative bg-gray-200 dark:bg-gray-800">
                   {imageErrors.has(index) ? (
-                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                      <ImageIcon size={48} className="text-gray-500" />
+                    <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
+                      <ImageIcon size={48} className="text-gray-400 dark:text-gray-500" />
                     </div>
                   ) : (
                     <>
                       {!imagesLoaded.has(index) && (
-                        <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
                           <div className="w-8 h-8 border-2 border-primary-green border-t-transparent rounded-full animate-spin"></div>
                         </div>
                       )}

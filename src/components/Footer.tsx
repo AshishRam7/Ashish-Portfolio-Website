@@ -36,11 +36,11 @@ const Footer = () => {
                   <span className="text-white font-bold text-xl">A</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">Ashish Ram J A</h3>
-                  <p className="text-sm text-gray-400">Software Developer</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Ashish Ram J A</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Software Developer</p>
                 </div>
               </div>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                 Passionate about creating innovative solutions through code.
                 Always learning, always building.
               </p>
@@ -54,13 +54,13 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Links</h4>
               <div className="grid grid-cols-2 gap-2">
                 {['Skills', 'Projects', 'Experience', 'Education', 'Contact'].map((link) => (
                   <a
                     key={link}
                     href={`#${link.toLowerCase()}`}
-                    className="text-gray-400 hover:text-primary-green-light transition-colors duration-300 text-sm"
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary-green-light transition-colors duration-300 text-sm"
                   >
                     {link}
                   </a>
@@ -76,7 +76,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h4 className="text-lg font-semibold text-white">Connect</h4>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Connect</h4>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -84,14 +84,14 @@ const Footer = () => {
                     href={social.href}
                     target={social.href.startsWith('http') ? '_blank' : undefined}
                     rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group p-3 rounded-xl bg-white/5 border border-white/10 hover:border-primary-green/30 hover:bg-primary-green/10 transition-all duration-300"
+                    className="group p-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-primary-green/30 hover:bg-primary-green/10 transition-all duration-300"
                     aria-label={social.label}
                   >
-                    <social.icon size={20} className="text-gray-400 group-hover:text-primary-green-light transition-colors duration-300" />
+                    <social.icon size={20} className="text-gray-600 dark:text-gray-400 group-hover:text-primary-green-light transition-colors duration-300" />
                   </a>
                 ))}
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Let's build something amazing together!
               </p>
             </motion.div>
@@ -99,11 +99,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10">
+        <div className="border-t border-gray-200 dark:border-white/10">
           <div className="max-w-6xl mx-auto px-4 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <motion.div
-                className="flex items-center gap-2 text-sm text-gray-400"
+                className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -120,7 +120,7 @@ const Footer = () => {
               {/* Back to top button */}
               <motion.button
                 onClick={scrollToTop}
-                className="group flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:border-primary-green/30 hover:bg-primary-green/10 transition-all duration-300 text-sm text-gray-400 hover:text-primary-green-light"
+                className="group flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg hover:border-primary-green/30 hover:bg-primary-green/10 transition-all duration-300 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-green-light"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}

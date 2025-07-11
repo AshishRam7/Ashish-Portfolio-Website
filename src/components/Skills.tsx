@@ -82,7 +82,7 @@ const Skills = () => {
     >
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">Technical Skills</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
           A comprehensive toolkit of technologies and frameworks I use to bring ideas to life
         </p>
       </div>
@@ -103,10 +103,10 @@ const Skills = () => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1 h-8 bg-gradient-to-b from-primary-green to-accent-green rounded-full"></div>
-                <h3 className="text-xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300">
                   {category.title}
                 </h3>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent"></div>
+                <div className="flex-1 h-px bg-gradient-to-r from-gray-300 dark:from-white/20 to-transparent"></div>
               </div>
 
               <motion.div className="flex flex-wrap gap-3">
@@ -137,10 +137,10 @@ const Skills = () => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1 h-8 bg-gradient-to-b from-primary-green to-accent-green rounded-full"></div>
-                <h3 className="text-xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300">
                   {category.title}
                 </h3>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent"></div>
+                <div className="flex-1 h-px bg-gradient-to-r from-gray-300 dark:from-white/20 to-transparent"></div>
               </div>
 
               <motion.div className="flex flex-wrap gap-3">
@@ -175,25 +175,25 @@ const Skills = () => {
             <div className="text-3xl font-bold text-primary-green-light mb-2 group-hover:scale-110 transition-transform duration-300">
               {skillCategories.reduce((total, category) => total + category.skills.length, 0)}+
             </div>
-            <div className="text-sm text-gray-400">Technologies</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Technologies</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-accent-green mb-2 group-hover:scale-110 transition-transform duration-300">
               {skillCategories.length}
             </div>
-            <div className="text-sm text-gray-400">Categories</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Categories</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-neon-green mb-2 group-hover:scale-110 transition-transform duration-300">
               3+
             </div>
-            <div className="text-sm text-gray-400">Years of Building</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Years of Building</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-primary-green mb-2 group-hover:scale-110 transition-transform duration-300">
               ∞
             </div>
-            <div className="text-sm text-gray-400">Learning</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Learning</div>
           </div>
         </div>
       </motion.div>

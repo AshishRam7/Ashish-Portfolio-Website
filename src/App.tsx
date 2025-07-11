@@ -98,7 +98,7 @@ function App() {
       />
 
       {/* Main content */}
-      <main className="min-h-screen pt-6">
+      <main className="min-h-screen pt-6 relative z-10">
         {/* Hero Section */}
         <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-16 lg:py-24 relative overflow-hidden">
           {/* Background Elements */}
@@ -149,11 +149,10 @@ function App() {
                 {/* About Me Text */}
                 <p className="text-lg text-gray-400 leading-relaxed max-w-2xl font-light">
                   Computer Science Engineering student at <span className="text-primary-green-light font-medium">VIT Chennai</span> with expertise in
-                  <span className="text-accent font-medium"> web development</span>,
-                  <span className="text-primary-green-light font-medium"> artificial intelligence</span>, and
-                  <span className="text-neon-green font-medium"> blockchain technology</span>.
+                  <span className="text-accent font-medium"> web development</span> and
+                  <span className="text-neon-green font-medium"> artificial intelligence</span>.
                   Passionate about <span className="text-accent font-medium">Generative AI</span> and
-                  <span className="text-primary-green-light font-medium"> Deep Learning</span> research.
+                  <span className="text-primary-green-light font-medium"> Deep Learning</span>development and research.
                 </p>
               </div>
 

@@ -39,7 +39,7 @@ const Contact = () => {
     >
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">Let's Connect</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
           Ready to collaborate on exciting projects or discuss opportunities? I'd love to hear from you!
         </p>
       </div>
@@ -48,14 +48,14 @@ const Contact = () => {
         {/* Contact Methods */}
         <div className="space-y-6">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Get in Touch</h3>
             {contactMethods.map((method, index) => (
               <motion.a
                 key={index}
                 href={method.href}
                 target={method.href.startsWith('http') ? '_blank' : undefined}
                 rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="group block p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
+                className="group block p-6 bg-gradient-to-br from-gray-50/80 to-gray-100/80 dark:from-white/5 dark:to-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -67,13 +67,13 @@ const Contact = () => {
                     <method.icon size={24} className="text-white" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-white group-hover:text-primary-green-light transition-colors duration-300">
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300">
                       {method.label}
                     </h4>
                     <p className="text-primary-green-light font-medium">{method.value}</p>
-                    <p className="text-sm text-gray-400 mt-1">{method.description}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{method.description}</p>
                   </div>
-                  <Send size={20} className="text-gray-400 group-hover:text-primary-green-light group-hover:translate-x-1 transition-all duration-300" />
+                  <Send size={20} className="text-gray-600 dark:text-gray-400 group-hover:text-primary-green-light group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </motion.a>
             ))}
@@ -117,8 +117,8 @@ const Contact = () => {
             <div className="w-16 h-16 bg-gradient-to-r from-primary-green to-accent-green rounded-full flex items-center justify-center mx-auto mb-6">
               <MessageCircle size={32} className="text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Start a Project?</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Ready to Start a Project?</h3>
+            <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
               Whether you have a specific project in mind or just want to explore possibilities,
               I'm excited to discuss how we can work together to bring your ideas to life.
             </p>
@@ -132,12 +132,12 @@ const Contact = () => {
           </div>
 
           {/* Availability Status */}
-          <div className="p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl">
+          <div className="p-6 bg-gradient-to-br from-gray-50/80 to-gray-100/80 dark:from-white/5 dark:to-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-3 h-3 bg-primary-green rounded-full animate-pulse"></div>
-              <h4 className="text-lg font-semibold text-white">Current Status</h4>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Current Status</h4>
             </div>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               Currently open to <span className="text-primary-green-light font-medium">freelance projects</span>,
               <span className="text-accent-green font-medium"> internship opportunities</span>, and
               <span className="text-neon-green font-medium"> collaborative ventures</span> in AI/ML and web development.

@@ -27,7 +27,7 @@ const Experience = () => {
     >
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">Professional Experience</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
           Building expertise through hands-on experience in cutting-edge technology
         </p>
       </div>
@@ -50,11 +50,11 @@ const Experience = () => {
               <div className="absolute left-6 w-4 h-4 bg-gradient-to-r from-primary-green to-accent-green rounded-full border-4 border-bg-secondary group-hover:scale-125 transition-transform duration-300 shadow-glow"></div>
 
               {/* Content card */}
-              <div className="ml-20 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 group-hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow">
+              <div className="ml-20 bg-gradient-to-br from-gray-50/80 to-gray-100/80 dark:from-white/5 dark:to-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 group-hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-2xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300">
                         {exp.title}
                       </h3>
                       <span className="px-3 py-1 bg-primary-green/20 border border-primary-green/30 text-primary-green-light text-xs font-medium rounded-full">
@@ -62,13 +62,13 @@ const Experience = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2 text-gray-300">
+                    <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                       <Building2 size={16} className="text-accent-green" />
                       <span className="font-medium">{exp.company}</span>
                     </div>
                   </div>
 
-                  <div className="flex flex-col lg:items-end gap-2 text-sm text-gray-400">
+                  <div className="flex flex-col lg:items-end gap-2 text-sm text-gray-600 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <Calendar size={16} className="text-primary-green" />
                       <span>{exp.duration}</span>

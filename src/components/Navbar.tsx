@@ -52,8 +52,8 @@ const Navbar = ({ sections, activeSection, setActiveSection }: NavbarProps) => {
         >
         <div className={`px-6 py-3 rounded-2xl transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/20 dark:bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20 dark:border-white/20'
-            : 'bg-black/10 dark:bg-white/5 backdrop-blur-lg shadow-xl border border-white/10 dark:border-white/10'
+            ? 'bg-white/90 dark:bg-black/20 backdrop-blur-xl shadow-2xl border border-gray-200 dark:border-white/20'
+            : 'bg-white/80 dark:bg-black/10 backdrop-blur-lg shadow-xl border border-gray-100 dark:border-white/10'
         }`}>
           <div className="flex items-center justify-center">
             {/* Desktop Navigation */}
@@ -64,8 +64,8 @@ const Navbar = ({ sections, activeSection, setActiveSection }: NavbarProps) => {
                   onClick={() => scrollToSection(section.id)}
                   className={`relative p-3 rounded-xl transition-all duration-300 group ${
                     activeSection === section.id
-                      ? 'text-primary-green-light bg-white/20 dark:bg-white/20 shadow-lg'
-                      : 'text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/10'
+                      ? 'text-primary-green-light bg-primary-green/20 shadow-lg'
+                      : 'text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
                   }`}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -90,7 +90,7 @@ const Navbar = ({ sections, activeSection, setActiveSection }: NavbarProps) => {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-3 rounded-xl text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/10 transition-all duration-300"
+              className="md:hidden p-3 rounded-xl text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -144,7 +144,7 @@ const Navbar = ({ sections, activeSection, setActiveSection }: NavbarProps) => {
 
             {/* Menu Panel */}
             <motion.div
-              className="absolute top-24 left-4 right-4 bg-black/20 dark:bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-white/20 overflow-hidden"
+              className="absolute top-24 left-4 right-4 bg-white/95 dark:bg-black/20 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 dark:border-white/20 overflow-hidden"
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -157,8 +157,8 @@ const Navbar = ({ sections, activeSection, setActiveSection }: NavbarProps) => {
                     onClick={() => scrollToSection(section.id)}
                     className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all duration-300 ${
                       activeSection === section.id
-                        ? 'text-primary-green-light bg-white/20 dark:bg-white/20 border-l-4 border-primary-green shadow-lg'
-                        : 'text-white/80 dark:text-white/80 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/10'
+                        ? 'text-primary-green-light bg-primary-green/20 border-l-4 border-primary-green shadow-lg'
+                        : 'text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}

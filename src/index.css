@@ -107,6 +107,63 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* Light mode project cards */
+.light .project-card {
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(248, 250, 252, 0.95) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode loading skeleton */
+.light .loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  );
+}
+
+/* Light mode text color utilities */
+.light .text-white {
+  color: var(--text-primary) !important;
+}
+
+.light .text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+.light .text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+/* Light mode background utilities */
+.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .from-white\/5 {
+  --tw-gradient-from: rgba(0, 0, 0, 0.05) !important;
+}
+
+.light .to-white\/10 {
+  --tw-gradient-to: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Light mode border utilities */
+.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
 * {
   box-sizing: border-box;
 }

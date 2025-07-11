@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ExternalLink, Code2, ChevronDown } from 'lucide-react';
+import { useState, useCallback } from 'react';
+import { ExternalLink, Code2, ChevronDown, ImageIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Project {
@@ -15,6 +15,11 @@ interface Project {
 
 const Projects = () => {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+
+
+
+  const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
 
   const projects: Project[] = [
      // 1. SamurAI
@@ -108,18 +113,20 @@ const Projects = () => {
      },
   ];
 
-  const toggleProject = (index: number) => {
+  const toggleProject = useCallback((index: number) => {
     setExpandedProject(expandedProject === index ? null : index);
-  };
+  }, [expandedProject]);
+
+  const handleImageError = useCallback((index: number) => {
+    setImageErrors(prev => new Set(prev).add(index));
+  }, []);
+
+  const handleImageLoad = useCallback((index: number) => {
+    setImagesLoaded(prev => new Set(prev).add(index));
+  }, []);
 
   return (
-    <motion.section
-      className="glass-card p-8"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
+    <section className="glass-card p-6 sm:p-8 lg:p-12 xl:p-16">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">Featured Projects</h2>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -129,26 +136,38 @@ const Projects = () => {
 
       <div className="space-y-8">
         {projects.map((project, index) => (
-          <motion.div
+          <div
             key={index}
             className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ scale: 1.01 }}
           >
             <div className="grid lg:grid-cols-5 gap-0">
               {/* Image Section - Takes 2 columns */}
               <div className={`lg:col-span-2 relative overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="aspect-video lg:aspect-square relative">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="aspect-video lg:aspect-square relative bg-gray-800">
+                  {imageErrors.has(index) ? (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                      <ImageIcon size={48} className="text-gray-500" />
+                    </div>
+                  ) : (
+                    <>
+                      {!imagesLoaded.has(index) && (
+                        <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                          <div className="w-8 h-8 border-2 border-primary-green border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`w-full h-full object-cover transition-all duration-300 ${
+                          imagesLoaded.has(index) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        loading="eager"
+                        onLoad={() => handleImageLoad(index)}
+                        onError={() => handleImageError(index)}
+                      />
+                    </>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
                   {/* Project number badge */}
                   <div className="absolute top-4 right-4">
@@ -196,7 +215,7 @@ const Projects = () => {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          transition={{ duration: 0.2, ease: "easeInOut" }}
                           className="space-y-3 overflow-hidden"
                         >
                           {project.description.slice(1).map((desc, i) => (
@@ -217,9 +236,9 @@ const Projects = () => {
                         <span>{expandedProject === index ? 'Show Less' : 'Read More'}</span>
                         <motion.div
                           animate={{ rotate: expandedProject === index ? 180 : 0 }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <ChevronDown size={16} className="group-hover/btn:scale-110 transition-transform duration-300" />
+                          <ChevronDown size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
                         </motion.div>
                       </button>
                     )}
@@ -258,10 +277,10 @@ const Projects = () => {
 
             {/* Hover effect overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"></div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 };
 

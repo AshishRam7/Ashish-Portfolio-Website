@@ -35,7 +35,7 @@ const Education = () => {
 
   return (
     <motion.section
-      className="glass-card p-8"
+      className="glass-card p-6 sm:p-8 lg:p-12 xl:p-16"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

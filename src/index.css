@@ -30,9 +30,9 @@
   --bg-tertiary: #1f2937;
 
   /* Glass Effect Variables */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Dark Theme (Default) */
@@ -52,10 +52,10 @@
   --border-secondary: rgba(255, 255, 255, 0.05);
 
   /* Glass Effect */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.1);
-  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Light Theme */
@@ -75,10 +75,10 @@
   --border-secondary: rgba(0, 0, 0, 0.05);
 
   /* Glass Effect */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.9);
-  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.15);
+  --glass-hover: rgba(255, 255, 255, 0.95);
+  --glass-shadow: rgba(0, 0, 0, 0.15);
 }
 
 /* Light mode specific overrides */
@@ -100,6 +100,11 @@
     0 20px 40px rgba(0, 0, 0, 0.15),
     0 0 30px rgba(16, 185, 129, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Light mode overlay for better readability */
+.light .glass-card::before {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 * {
@@ -168,6 +173,18 @@ html {
     0 8px 32px var(--glass-shadow),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Add a more opaque overlay for better readability */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .glass-card:hover {

@@ -212,7 +212,7 @@ function App() {
         </section>
 
         {/* Other Sections Container */}
-        <div className="max-w-4xl mx-auto px-4 py-8 space-y-24">
+        <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 2xl:px-32 py-8 space-y-24">
           {/* Render sections based on the order in the 'sections' array (excluding 'hero') */}
           {sections.slice(1).map(section => (
             <section key={section.id} id={section.id}>

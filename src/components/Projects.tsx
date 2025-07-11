@@ -129,7 +129,7 @@ const Projects = () => {
     <section className="glass-card p-6 sm:p-8 lg:p-12 xl:p-16">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">Featured Projects</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
           A showcase of my recent work in AI, web development, and innovative solutions
         </p>
       </div>
@@ -146,7 +146,7 @@ const Projects = () => {
                 <div className="aspect-video lg:aspect-square relative bg-gray-200 dark:bg-gray-800">
                   {imageErrors.has(index) ? (
                     <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
-                      <ImageIcon size={48} className="text-gray-400 dark:text-gray-500" />
+                      <ImageIcon size={48} className="text-gray-500 dark:text-gray-500" />
                     </div>
                   ) : (
                     <>
@@ -184,7 +184,7 @@ const Projects = () => {
                   {/* Header */}
                   <div className="space-y-4">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-2xl lg:text-3xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300 leading-tight">
+                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300 leading-tight">
                         {project.title}
                       </h3>
                     </div>
@@ -204,7 +204,7 @@ const Projects = () => {
 
                   {/* Project Description */}
                   <div className="space-y-4">
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                       {project.description[0]}
                     </p>
 
@@ -219,7 +219,7 @@ const Projects = () => {
                           className="space-y-3 overflow-hidden"
                         >
                           {project.description.slice(1).map((desc, i) => (
-                            <div key={i} className="text-gray-400 leading-relaxed flex items-start gap-3">
+                            <div key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-3">
                               <div className="w-1.5 h-1.5 bg-primary-green rounded-full mt-2 flex-shrink-0"></div>
                               <span>{desc}</span>
                             </div>

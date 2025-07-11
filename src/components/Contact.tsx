@@ -1,5 +1,83 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Linkedin, Github, MessageCircle, Send, MapPin, Calendar } from 'lucide-react';
+import { useState } from 'react';
+
+// Contact Button with Hover Options Component
+const ContactButton = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const contactOptions = [
+    {
+      icon: Linkedin,
+      label: "LinkedIn Message",
+      href: "https://www.linkedin.com/in/ashish-ram-j-a-/",
+      color: "from-blue-600 to-blue-700",
+      description: "Connect professionally"
+    },
+    {
+      icon: Mail,
+      label: "Email Me",
+      href: "mailto:ashishram.ja15@gmail.com",
+      color: "from-green-600 to-green-700",
+      description: "Direct email"
+    }
+  ];
+
+  return (
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Original Button */}
+      <div className={`${className} cursor-pointer transition-all duration-300 ${isHovered ? 'opacity-50' : ''}`}>
+        {children}
+      </div>
+
+      {/* Hover Options */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50"
+          >
+            <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200 dark:border-white/20 rounded-2xl shadow-2xl overflow-hidden min-w-[280px]">
+              <div className="p-2">
+                {contactOptions.map((option, index) => (
+                  <motion.a
+                    key={index}
+                    href={option.href}
+                    target={option.href.startsWith('http') ? '_blank' : undefined}
+                    rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-200"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                    whileHover={{ x: 4 }}
+                  >
+                    <div className={`p-3 rounded-xl bg-gradient-to-r ${option.color} group-hover:scale-110 transition-transform duration-300`}>
+                      <option.icon size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-green-light transition-colors duration-300">
+                        {option.label}
+                      </h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{option.description}</p>
+                    </div>
+                    <Send size={16} className="text-gray-400 group-hover:text-primary-green-light group-hover:translate-x-1 transition-all duration-300" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const Contact = () => {
   const contactMethods = [
@@ -79,6 +157,20 @@ const Contact = () => {
             ))}
           </div>
 
+          {/* Quick Contact Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex justify-center"
+          >
+            <ContactButton className="btn-primary inline-flex items-center gap-3 px-6 py-3 font-semibold group">
+              <MessageCircle size={18} className="group-hover:scale-110 transition-transform duration-300" />
+              <span>Quick Contact</span>
+            </ContactButton>
+          </motion.div>
+
           {/* Quick Info */}
           <motion.div
             className="p-6 bg-gradient-to-br from-primary-green/10 to-accent-green/10 border border-primary-green/20 rounded-2xl"
@@ -122,13 +214,10 @@ const Contact = () => {
               Whether you have a specific project in mind or just want to explore possibilities,
               I'm excited to discuss how we can work together to bring your ideas to life.
             </p>
-            <a
-              href="mailto:ashishram.ja15@gmail.com"
-              className="btn-primary inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold group"
-            >
+            <ContactButton className="btn-primary inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold group">
               <Mail size={20} className="group-hover:scale-110 transition-transform duration-300" />
               <span>Start a Conversation</span>
-            </a>
+            </ContactButton>
           </div>
 
           {/* Availability Status */}

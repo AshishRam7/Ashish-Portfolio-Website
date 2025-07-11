@@ -37,7 +37,7 @@ const Testimonials = () => {
     >
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4 section-heading">What Others Say</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
           Real feedback and testimonials from colleagues, teammates, and collaborators
         </p>
       </div>
@@ -47,7 +47,7 @@ const Testimonials = () => {
         {testimonials.map((testimonial, index) => (
           <motion.div
             key={index}
-            className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
+            className="group relative bg-white/95 dark:bg-gradient-to-br dark:from-white/5 dark:to-white/10 backdrop-blur-sm border border-gray-200/50 dark:border-white/10 rounded-2xl p-6 hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow shadow-soft"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -65,7 +65,7 @@ const Testimonials = () => {
             </div>
 
             {/* Quote */}
-            <blockquote className="text-gray-300 leading-relaxed mb-6 italic">
+            <blockquote className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6 italic">
               "{testimonial.quote}"
             </blockquote>
 
@@ -73,9 +73,9 @@ const Testimonials = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-white">{testimonial.author}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">{testimonial.author}</p>
                   {testimonial.title && (
-                    <p className="text-sm text-gray-400">{testimonial.title}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.title}</p>
                   )}
                 </div>
                 <span className="px-2 py-1 bg-accent-green/20 border border-accent-green/30 text-accent-green text-xs rounded-full">
@@ -101,9 +101,9 @@ const Testimonials = () => {
         <div className="p-6 bg-gradient-to-br from-primary-green/10 to-accent-green/10 border border-primary-green/20 rounded-2xl">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Heart size={24} className="text-red-400" />
-            <h3 className="text-xl font-bold text-white">Want to add your testimonial?</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Want to add your testimonial?</h3>
           </div>
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-700 dark:text-gray-400 mb-4">
             Have we worked together? I'd love to feature your feedback! Your testimonial helps showcase our collaboration and my work approach.
           </p>
           <a

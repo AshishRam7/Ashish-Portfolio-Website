@@ -1,80 +1,121 @@
-// src/components/Testimonials.tsx
-import React from 'react';
-import { MessageSquareQuote } from 'lucide-react'; // Using Quote icon
+import { motion } from 'framer-motion';
+import { MessageSquareQuote, Star, Users, Heart } from 'lucide-react';
 
 interface Testimonial {
   quote: string;
   author: string;
-  title?: string; // Optional title/company
-  // image?: string; // Optional author image URL
+  title?: string;
+  rating: number;
+  category: string;
 }
 
-const Testimonials: React.FC = () => {
-  // --- Replace with your actual testimonials ---
+const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
-      quote: "Working with Ashish was a fantastic experience. Their technical skills and problem-solving abilities are top-notch, and they consistently delivered high-quality work ahead of schedule.",
-      author: "Collaborator Name",
-      title: "Project Manager at XYZ Corp",
+      quote: "Ashish is highly goal-oriented and possesses the drive and capability to achieve his objectives. His focus and dedication are qualities I deeply respect. I have consistently had a productive and positive experience working with him.",
+      author: "Karneeshkar Velmurugan",
+      title: "Electronics & Computer Engineer | IoT & Embedded Systems | AI/ML | Cloud Expert",
+      rating: 5,
+      category: "Professional"
     },
     {
-      quote: "Ashish has a deep understanding of web development and AI concepts. Their passion for technology is evident, and they were always eager to learn and contribute innovative ideas.",
-      author: "Professor Name",
-      title: "Vellore Institute of Technology",
-    },
-    {
-        quote: "Highly recommend Ashish! They are dedicated, reliable, and brought a creative approach to our project challenges. A true asset to any team.",
-        author: "Client/Peer Name",
-        // title: "Optional Title"
-    },
-    // Add more testimonials here
+      quote: "Ashish is such a nice person to have around. We both worked together for a hackathon, so from my perspective he is well organised, diligent and a fast learner, these skills from him really helped our team to secure a good rank in that hackathon, it was a pleasure to work with Ashish.",
+      author: "Aadithya Niranjan",
+      title: "SDE @Amazon | Technical department @ IEEE Computer Society - VITC | Member at DAO Community VIT-C",
+      rating: 5,
+      category: "Collaboration"
+    }
   ];
-  // --- End of placeholder data ---
-
-  // Optional: Message if no testimonials yet
-   if (testimonials.length === 0) {
-     return (
-       <section className="content-card rounded-xl p-6">
-         <h2 className="text-2xl font-bold mb-6 section-heading flex items-center gap-2">
-           <MessageSquareQuote size={24} />
-           Testimonials
-         </h2>
-         <p className="text-gray-400 italic">No testimonials available yet. Check back later!</p>
-       </section>
-     );
-   }
-
 
   return (
-    <section className="content-card rounded-xl p-6">
-      <h2 className="text-2xl font-bold mb-6 section-heading flex items-center gap-2">
-        <MessageSquareQuote size={24} />
-        What Others Say
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <motion.section
+      className="glass-card p-8"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold mb-4 section-heading">What Others Say</h2>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Real feedback and testimonials from colleagues, teammates, and collaborators
+        </p>
+      </div>
+
+      {/* Real testimonials */}
+      <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
         {testimonials.map((testimonial, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-black/40 border border-[#39ff14]/15 rounded-lg p-5 flex flex-col transition-all duration-300 hover:border-[#39ff14]/30 hover:shadow-lg hover:shadow-[#39ff14]/10"
+            className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.02 }}
           >
-             {/* Optional: Add quote icon inside the card */}
-             {/* <Quote className="w-8 h-8 text-[#39ff14]/30 mb-3" /> */}
-            <blockquote className="text-gray-300 italic mb-4 flex-grow">
-             " {testimonial.quote} "
+            {/* Quote icon */}
+            <div className="flex items-center justify-between mb-4">
+              <MessageSquareQuote size={24} className="text-primary-green-light" />
+              <div className="flex items-center gap-1">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                ))}
+              </div>
+            </div>
+
+            {/* Quote */}
+            <blockquote className="text-gray-300 leading-relaxed mb-6 italic">
+              "{testimonial.quote}"
             </blockquote>
-            <footer className="mt-auto pt-3 border-t border-[#39ff14]/10">
-              <p className="font-semibold text-[#39ff14]/90">{testimonial.author}</p>
-              {testimonial.title && (
-                <p className="text-sm text-gray-400">{testimonial.title}</p>
-              )}
-              {/* {testimonial.image && (
-                <img src={testimonial.image} alt={testimonial.author} className="w-10 h-10 rounded-full mt-2" />
-              )} */}
-            </footer>
-          </div>
+
+            {/* Author info */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-white">{testimonial.author}</p>
+                  {testimonial.title && (
+                    <p className="text-sm text-gray-400">{testimonial.title}</p>
+                  )}
+                </div>
+                <span className="px-2 py-1 bg-accent-green/20 border border-accent-green/30 text-accent-green text-xs rounded-full">
+                  {testimonial.category}
+                </span>
+              </div>
+            </div>
+
+            {/* Hover effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+          </motion.div>
         ))}
       </div>
-    </section>
+
+      {/* Call to action */}
+      <motion.div
+        className="mt-12 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+      >
+        <div className="p-6 bg-gradient-to-br from-primary-green/10 to-accent-green/10 border border-primary-green/20 rounded-2xl">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Heart size={24} className="text-red-400" />
+            <h3 className="text-xl font-bold text-white">Want to add your testimonial?</h3>
+          </div>
+          <p className="text-gray-400 mb-4">
+            Have we worked together? I'd love to feature your feedback! Your testimonial helps showcase our collaboration and my work approach.
+          </p>
+          <a
+            href="mailto:ashishram.ja15@gmail.com?subject=Testimonial%20for%20Portfolio"
+            className="btn-primary inline-flex items-center gap-2 px-6 py-3 font-semibold group"
+          >
+            <Users size={20} className="group-hover:scale-110 transition-transform duration-300" />
+            <span>Share Your Experience</span>
+          </a>
+        </div>
+      </motion.div>
+    </motion.section>
   );
 };
 

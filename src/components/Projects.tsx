@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, Code2, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Project {
   title: string;
@@ -112,99 +113,155 @@ const Projects = () => {
   };
 
   return (
-    <section className="space-y-8" id="projects">
-      <h2 className="text-3xl font-bold mb-8 section-heading">Projects</h2>
-      <div className="grid gap-8">
+    <motion.section
+      className="glass-card p-8"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold mb-4 section-heading">Featured Projects</h2>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          A showcase of my recent work in AI, web development, and innovative solutions
+        </p>
+      </div>
+
+      <div className="space-y-8">
         {projects.map((project, index) => (
-          <div
+          <motion.div
             key={index}
-            className={`project-card rounded-xl overflow-hidden transition-all duration-300 border border-[#39ff14]/10 hover:border-[#39ff14]/30`}
+            className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary-green/30 transition-all duration-300 hover:shadow-glow"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.01 }}
           >
-            {/* Image Section */}
-            <div className="relative">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-64 object-cover"
-                // --- Added lazy loading attribute ---
-                loading="lazy"
-                // --- Optional: Add dimensions to help prevent layout shift ---
-                width="auto" // Or a specific pixel width if known and consistent
-                height="256" // Corresponds to h-64
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
-            </div>
+            <div className="grid lg:grid-cols-5 gap-0">
+              {/* Image Section - Takes 2 columns */}
+              <div className={`lg:col-span-2 relative overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="aspect-video lg:aspect-square relative">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
-            {/* Content Area */}
-            <div className="p-6">
-               {/* Top section: Title, Tech, Toggle Button */}
-               <div className="flex justify-between items-start mb-3">
-                  {/* Group title and tech stack */}
-                  <div>
-                     <h3 className="text-xl font-semibold mb-1 text-[#39ff14]/90 hover:text-[#39ff14] transition-colors">{project.title}</h3>
-                     <p className="text-sm text-gray-400 mb-2">{project.tech}</p>
+                  {/* Project number badge */}
+                  <div className="absolute top-4 right-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-primary-green to-accent-green rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
                   </div>
-                  {/* Toggle button */}
-                  <button
-                     onClick={() => toggleProject(index)}
-                     className="text-[#39ff14]/70 hover:text-[#39ff14] text-2xl font-light p-1 -mt-1 -mr-1 flex-shrink-0"
-                     aria-expanded={expandedProject === index}
-                     aria-label={expandedProject === index ? 'Collapse project details' : 'Expand project details'}
-                   >
-                     {expandedProject === index ? '−' : '+'}
-                   </button>
-               </div>
+                </div>
+              </div>
 
-              {/* Links Section */}
-              {project.links && (Object.values(project.links).some(link => link)) && (
-                <div className="mb-4 flex flex-wrap gap-x-6 gap-y-3 border-b border-[#39ff14]/10 pb-3">
-                  {project.links.live && (
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors text-sm"
-                    >
-                      <ExternalLink size={16} />
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                  {project.links.github && (
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex items-center gap-2 text-[#39ff14]/80 hover:text-[#39ff14] transition-colors text-sm"
-                    >
-                      <Github size={16} />
-                      <span>View Code</span>
-                    </a>
+              {/* Content Section - Takes 3 columns */}
+              <div className={`lg:col-span-3 p-8 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div className="space-y-6">
+                  {/* Header */}
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <h3 className="text-2xl lg:text-3xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300 leading-tight">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.split(', ').map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-primary-green/20 border border-primary-green/30 text-primary-green-light text-xs font-medium rounded-full hover:bg-primary-green/30 transition-colors duration-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Project Description */}
+                  <div className="space-y-4">
+                    <p className="text-gray-300 leading-relaxed">
+                      {project.description[0]}
+                    </p>
+
+                    {/* Expandable content */}
+                    <AnimatePresence>
+                      {expandedProject === index && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="space-y-3 overflow-hidden"
+                        >
+                          {project.description.slice(1).map((desc, i) => (
+                            <div key={i} className="text-gray-400 leading-relaxed flex items-start gap-3">
+                              <div className="w-1.5 h-1.5 bg-primary-green rounded-full mt-2 flex-shrink-0"></div>
+                              <span>{desc}</span>
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {project.description.length > 1 && (
+                      <button
+                        onClick={() => toggleProject(index)}
+                        className="flex items-center gap-2 text-primary-green-light hover:text-accent-green transition-colors duration-300 text-sm font-medium group/btn"
+                      >
+                        <span>{expandedProject === index ? 'Show Less' : 'Read More'}</span>
+                        <motion.div
+                          animate={{ rotate: expandedProject === index ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ChevronDown size={16} className="group-hover/btn:scale-110 transition-transform duration-300" />
+                        </motion.div>
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Action Buttons */}
+                  {project.links && (Object.values(project.links).some(link => link)) && (
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      {project.links.live && (
+                        <a
+                          href={project.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary flex items-center gap-2 px-6 py-3 text-sm group/link"
+                        >
+                          <ExternalLink size={16} className="group-hover/link:scale-110 transition-transform duration-300" />
+                          <span>Live Demo</span>
+                        </a>
+                      )}
+                      {project.links.github && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-secondary flex items-center gap-2 px-6 py-3 text-sm group/link"
+                        >
+                          <Code2 size={16} className="group-hover/link:scale-110 transition-transform duration-300" />
+                          <span>View Code</span>
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-
-              {/* Collapsible Description Section */}
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  expandedProject === index ? 'max-h-screen opacity-100 mt-2' : 'max-h-0 opacity-0'
-                }`}
-              >
-                 <div className="space-y-3">
-                    {project.description.map((desc, i) => (
-                      <p key={i} className="text-gray-300 flex items-start">
-                        <span className="mr-2 text-[#39ff14] mt-1 text-xs">•</span>
-                        {desc}
-                      </p>
-                    ))}
-                 </div>
-               </div>
+              </div>
             </div>
-           </div>
-         ))}
-       </div>
-     </section>
+
+            {/* Hover effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"></div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
   );
 };
 

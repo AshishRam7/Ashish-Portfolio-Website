@@ -1,6 +1,5 @@
 // FILE: src/components/Skills.tsx
-import React from 'react';
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
 
 const Skills = () => {
   const skillCategories = [
@@ -71,47 +70,95 @@ const Skills = () => {
   };
 
   return (
-    // Animate the whole section entry
     <motion.section
-      className="content-card rounded-xl p-6"
+      className="glass-card p-8"
       initial="hidden"
-      whileInView="visible" // Trigger animation when the section scrolls into view
-      viewport={{ once: true, amount: 0.2 }} // Trigger once, when 20% is visible
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       variants={{
          hidden: { opacity: 0, y: 50 },
-         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
        }}
     >
-      <h2 className="text-2xl font-bold mb-6 section-heading">Technical Skills</h2>
-      {/* Animate the container for categories */}
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold mb-4 section-heading">Technical Skills</h2>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          A comprehensive toolkit of technologies and frameworks I use to bring ideas to life
+        </p>
+      </div>
+
       <motion.div
-        className="space-y-6"
+        className="space-y-8"
         variants={containerVariants}
         initial="hidden"
-        animate="visible" // Animate immediately once the section is visible
+        animate="visible"
       >
         {skillCategories.map((category, index) => (
-          // Animate each category block
-          <motion.div key={index} variants={categoryVariants}>
-            <h3 className="text-lg font-semibold mb-3 text-[#39ff14]">{category.title}</h3>
-            <motion.div
-                className="flex flex-wrap gap-2"
-                // Use the same variants for the inner div if needed, or inherit
-            >
+          <motion.div
+            key={index}
+            variants={categoryVariants}
+            className="group"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-8 bg-gradient-to-b from-primary-green to-accent-green rounded-full"></div>
+              <h3 className="text-xl font-bold text-white group-hover:text-primary-green-light transition-colors duration-300">
+                {category.title}
+              </h3>
+              <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent"></div>
+            </div>
+
+            <motion.div className="flex flex-wrap gap-3">
               {category.skills.map((skill, skillIndex) => (
-                // Animate each skill tag
                 <motion.span
                   key={skillIndex}
-                  className="px-3 py-1 bg-black/50 border border-[#39ff14]/20 text-gray-300 rounded-full text-sm cursor-default" // Added cursor-default
+                  className="skill-tag group/skill cursor-default"
                   variants={skillVariants}
-                  whileHover="hover" // Apply hover animation
+                  whileHover="hover"
                 >
-                  {skill}
+                  <span className="relative z-10">{skill}</span>
+                  {/* Animated background on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-green/20 to-accent-green/20 rounded-full opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300"></div>
                 </motion.span>
               ))}
             </motion.div>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* Skills Summary Stats */}
+      <motion.div
+        className="mt-12 pt-8 border-t border-white/10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+      >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="text-center group">
+            <div className="text-3xl font-bold text-primary-green-light mb-2 group-hover:scale-110 transition-transform duration-300">
+              {skillCategories.reduce((total, category) => total + category.skills.length, 0)}+
+            </div>
+            <div className="text-sm text-gray-400">Technologies</div>
+          </div>
+          <div className="text-center group">
+            <div className="text-3xl font-bold text-accent-green mb-2 group-hover:scale-110 transition-transform duration-300">
+              {skillCategories.length}
+            </div>
+            <div className="text-sm text-gray-400">Categories</div>
+          </div>
+          <div className="text-center group">
+            <div className="text-3xl font-bold text-neon-green mb-2 group-hover:scale-110 transition-transform duration-300">
+              3+
+            </div>
+            <div className="text-sm text-gray-400">Years Experience</div>
+          </div>
+          <div className="text-center group">
+            <div className="text-3xl font-bold text-primary-green mb-2 group-hover:scale-110 transition-transform duration-300">
+              ∞
+            </div>
+            <div className="text-sm text-gray-400">Learning</div>
+          </div>
+        </div>
       </motion.div>
     </motion.section>
   );
